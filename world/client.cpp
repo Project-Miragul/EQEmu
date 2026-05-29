@@ -230,6 +230,7 @@ void Client::SendExpansionInfo() {
 void Client::SendCharInfo() {
 	if (cle) {
 		cle->SetOnline(CLE_Status::CharSelect);
+		zone_id = 0;
 	}
 
 	if (m_ClientVersionBit & EQ::versions::maskRoFAndLater) {

@@ -120,11 +120,12 @@ void ClientList::GetCLEIP(uint32 in_ip) {
 
 		if (
 			cle->GetIP() == in_ip &&
+			cle->GetOnline() > CLE_Status::Offline &&
 			(
 				cle->Admin() < RuleI(World, ExemptMaxClientsStatus) ||
 				RuleI(World, ExemptMaxClientsStatus) < 0
 			)
-		) { // If the IP matches, and the connection admin status is below the exempt status, or exempt status is less than 0 (no-one is exempt)
+		) { // If the IP matches, connection is active (not stale/offline), and the connection admin status is below the exempt status, or exempt status is less than 0 (no-one is exempt)
 			auto ip_string = long2ip(cle->GetIP());
 			count++; // Increment the occurences of this IP address
 			LogClientLogin("Account ID: [{}] Account Name: [{}] IP: [{}]", cle->LSID(), cle->LSName(), ip_string);
